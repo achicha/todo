@@ -7,11 +7,42 @@ services:
       context: .
       dockerfile: ./Dockerfile
     working_dir: /opt/web
-    #links:
-    #  - postgres
+    links:
+      - postgres:postgres
     volumes:
       - ../:/opt/web
     ports:
       - "2225:22" # ssh to container
       - "5000:5000"
-    command: /sbin/my_init
+    command: /usr/local/bin/gunicorn -w 2 -b :8000 app:app
+
+  nginx:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - /web/static
+    volumes_from:
+      - web
+    links:
+      - web:web
+
+  data:
+    restart: 'no'
+    image: postgres:9.5
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    command: echo "start data container"
+
+  postgres:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile_postgres
+    volumes_from:
+      - data
+    ports:
+      - "5454:5432"
