@@ -1,0 +1,17 @@
+version: '2'
+services:
+  web:
+    restart: always
+    container_name: todo_list
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    working_dir: /opt/web
+    #links:
+    #  - postgres
+    volumes:
+      - ../:/opt/web
+    ports:
+      - "2225:22" # ssh to container
+      - "5000:5000"
+    command: /sbin/my_init
