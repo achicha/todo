@@ -6,6 +6,8 @@ import os
 class BaseConfig(object):
     SECRET_KEY = os.environ['SECRET_KEY']
     DEBUG = os.environ['DEBUG']
+    # "Cross-site Request Forgery (CSRF)"
+    CSRF_ENABLED = True
     DB_NAME = os.environ['DB_NAME']
     DB_USER = os.environ['DB_USER']
     DB_PASS = os.environ['DB_PASS']

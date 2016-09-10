@@ -1,7 +1,7 @@
+from app.database import db
 import datetime
-from app import db
 
-"""SQL Tables via SQLAlchemy"""
+"""SQLAlchemy models"""
 
 
 class Post(db.Model):

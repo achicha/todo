@@ -3,11 +3,11 @@
 from flask import Flask
 from flask import request, render_template
 from flask_sqlalchemy import SQLAlchemy
-from config.config import BaseConfig
 
+from config import DevConfig
 
 app = Flask(__name__)
-app.config.from_object(BaseConfig)
+app.config.from_object(DevConfig)
 db = SQLAlchemy(app)
 
 
@@ -26,4 +26,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')

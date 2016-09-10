@@ -1,4 +1,7 @@
-from app import db
+from app.database import db
+from app import create_app
 
-# create the database and the db tables via SQLAlchemy
-db.create_all()
+myapp = create_app()
+
+with myapp.app_context():
+    db.create_all()
