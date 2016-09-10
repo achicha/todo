@@ -1,6 +1,8 @@
 import datetime
 from app import db
 
+"""SQL Tables via SQLAlchemy"""
+
 
 class Post(db.Model):
 

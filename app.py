@@ -1,18 +1,29 @@
-from flask import Flask, jsonify
+# app.py
+
+from flask import Flask
+from flask import request, render_template
+from flask_sqlalchemy import SQLAlchemy
+from config.config import BaseConfig
+
 
 app = Flask(__name__)
+app.config.from_object(BaseConfig)
+db = SQLAlchemy(app)
 
 
-@app.route('/')
+from models import *
+
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return 'Flask is running!'
-
-
-@app.route('/data')
-def names():
-    data = {"names": ["John", "Jacob", "Julie", "Jennifer"]}
-    return jsonify(data)
+    if request.method == 'POST':
+        text = request.form['text']
+        post = Post(text)
+        db.session.add(post)
+        db.session.commit()
+    posts = Post.query.order_by(Post.date_posted.desc()).all()
+    return render_template('index.html', posts=posts)
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host='0.0.0.0', debug=True)

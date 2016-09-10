@@ -2,6 +2,7 @@ FROM postgres:9.5
 
 ENV POSTGRES_USER docker
 ENV POSTGRES_PASSWORD secret
-ENV POSTGRES_DB discover_flask
+ENV POSTGRES_DB todo_app
 
-#ADD ./etc/createDB.sql /docker-entrypoint-initdb.d/
+# create DB when docker init, without create_db.py
+#ADD ./etc/schema.sql /docker-entrypoint-initdb.d/
