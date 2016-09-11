@@ -29,5 +29,5 @@ class User(db.Model):
     def get_id(self):
         return self.id
 
-    def __repr__(self):  # pragma: no cover
+    def __repr__(self):
         return '<name - {}>'.format(self.name)

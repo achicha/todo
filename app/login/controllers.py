@@ -41,7 +41,7 @@ def logout():
     return redirect(url_for('todo.todo_lst'))
 
 
-@bp_users.route('/register', methods=['GET', 'POST'])   # pragma: no cover
+@bp_users.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
     if form.validate_on_submit():

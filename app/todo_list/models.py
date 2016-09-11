@@ -26,5 +26,5 @@ class Post(db.Model):
         self.date_posted = datetime.datetime.now()
         self.author_id = author_id
 
-    def __repr__(self):  # pragma: no cover
+    def __repr__(self):
         return '<title {}>'.format(self.text)

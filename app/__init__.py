@@ -16,7 +16,7 @@ def create_app():
     # init DB
     db.init_app(app)
     # init Debugger
-    toolbar = DebugToolbarExtension(app)
+    #toolbar = DebugToolbarExtension(app)
     #toolbar.init_app(app)
 
     from app.todo_list.controllers import bp_todo
