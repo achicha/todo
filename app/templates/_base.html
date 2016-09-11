@@ -17,6 +17,14 @@
       <br>
       <!-- child template -->
       {% block content %}{% endblock %}
+      <!-- errors -->
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
+      {% endif %}
+       <!-- messages -->
+      {% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}
     </div>
     <!-- scripts -->
     <script src="//code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>

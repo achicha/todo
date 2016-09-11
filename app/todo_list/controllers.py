@@ -1,5 +1,6 @@
 from flask import flash, redirect, render_template, request, \
     url_for, Blueprint
+from flask_login import login_required, current_user
 from .models import db, Post
 
 bp_todo = Blueprint('todo', __name__,
@@ -8,16 +9,14 @@ bp_todo = Blueprint('todo', __name__,
 
 
 @bp_todo.route('/', methods=['GET', 'POST'])
+@login_required
 def todo_lst():
+    error = None
     if request.method == 'POST':
         text = request.form['text']
-        post = Post(text)
+        post = Post(text=text, author_id=current_user.id)
         db.session.add(post)
         db.session.commit()
     posts = Post.query.order_by(Post.date_posted.desc()).all()
-    return render_template('index.html', posts=posts)
+    return render_template('todo_list.html', posts=posts, error=error)
 
-# @bp_todo.route('/')
-# def index():
-#     flash('Redirect to todo_list.')
-#     return redirect(url_for('todo_list'))

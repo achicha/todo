@@ -1,8 +1,15 @@
 flask
+flask_script
 flask-sqlalchemy
 flask-migrate
+
+flask_login
+flask-bcrypt
+flask-mail
 flask-wtf
-flask_script
+
+flask-testing
+coverage
 
 # todo separate configs
 # dev
