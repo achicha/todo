@@ -1,8 +1,8 @@
 language: python
 python:
-  - "3.5"
+  - "3.5.2"
 
 # command to install dependencies
-install: "pip install -r /etc/requirements.txt"
+install: "pip install -r etc/requirements.txt"
 # command to run tests
 script: "python manage.py test"
