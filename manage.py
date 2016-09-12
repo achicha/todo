@@ -55,5 +55,19 @@ def cov():
     cov.erase()
 
 
+@manager.command
+def create_db():
+    """Creates the db tables."""
+    with app.app_context():
+        db.create_all()
+
+
+@manager.command
+def drop_db():
+    """Drops the db tables."""
+    with app.app_context():
+        db.drop_all()
+
+
 if __name__ == '__main__':
     manager.run()
