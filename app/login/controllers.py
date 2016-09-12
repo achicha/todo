@@ -48,7 +48,8 @@ def register():
         user = User(
             name=form.username.data,
             email=form.email.data,
-            password=form.password.data
+            password=form.password.data,
+            confirmed=False
         )
         db.session.add(user)
         db.session.commit()

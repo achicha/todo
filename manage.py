@@ -1,9 +1,11 @@
 import os
 import unittest
 import coverage
+import datetime
 
-from flask_migrate import Migrate
+from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Server
+from app.login.models import User
 
 from app import create_app
 from app.database import db
@@ -24,6 +26,8 @@ app = create_app()
 app.config.from_object('config.DevConfig')
 migrate = Migrate(app, db)  # create migration instance
 manager = Manager(app)  # create Manager instance
+
+manager.add_command('db', MigrateCommand)  # migrations
 manager.add_command("runserver", Server(
     host='0.0.0.0',
     use_debugger=True,
@@ -68,6 +72,19 @@ def drop_db():
     with app.app_context():
         db.drop_all()
 
+
+@manager.command
+def create_admin():
+    """Creates the admin user."""
+    db.session.add(User(
+        name='admin',
+        email="ad@min.com",
+        password="admin",
+        admin=True,
+        confirmed=True,
+        confirmed_on=datetime.datetime.now())
+    )
+    db.session.commit()
 
 if __name__ == '__main__':
     manager.run()
